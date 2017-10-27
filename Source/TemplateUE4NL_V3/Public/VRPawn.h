@@ -18,6 +18,11 @@
 #include "GameFramework/Pawn.h"
 #include "VRPawn.generated.h"
 
+//Forward Declaration
+class UCapsuleComponent;
+class UCameraComponent;
+class UMotionControllerComponent;
+
 // Gravity Setting
 USTRUCT(BlueprintType)
 struct  FGravityProperty
@@ -53,7 +58,42 @@ class TEMPLATEUE4NL_V3_API AVRPawn : public APawn
 
 public:
 	// Sets default values for this pawn's properties
-	AVRPawn();
+	AVRPawn(const class FObjectInitializer & PCIP);
+	
+	//Properties
+
+	// Enable Gravity for this pawn
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VR")
+	bool enableGravity;
+
+	// gravity variable
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VR")
+	FGravityProperty gravityVariable;
+
+	//  Oculus HMD Location offset
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VR")
+	FVector oculusLocationOffset;
+
+	// Capsule Component
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR")
+	UCapsuleComponent *capsuleCollision;
+
+	// Scene Component
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR")
+	USceneComponent *scene;
+
+	// Pawn Camera
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR")
+	UCameraComponent *camera;
+
+	//
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR")
+	UMotionControllerComponent *motionControllerLeft = nullptr;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "VR")
+	UMotionControllerComponent *motionControllerRight = nullptr;
+
+	//TODO Set override method default pawn VR
+
 
 protected:
 	// Called when the game starts or when spawned
