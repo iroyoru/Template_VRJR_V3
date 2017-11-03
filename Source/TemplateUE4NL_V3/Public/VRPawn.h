@@ -94,6 +94,28 @@ public:
 
 	//TODO Set override method default pawn VR
 
+	//Override default pawn vr values
+	UFUNCTION(BlueprintCallable, Category = "VR")
+		void overridePawnValues(float PawnBaseEyeHeight = 0.f, float FOV = 110.f, float CapsuleHalfHeight = 96.f, float CapsuleRadius = 22.f,
+			FVector CapsuleRelativeLocation = FVector(0.f, 0.f, -110.f),
+			FVector SceneLocation = FVector(0.f, 0.f, -110.f),
+			FVector LeftControllerLocation = FVector(0.f, 0.f, 110.f),
+			FVector RightControllerLocation = FVector(0.f, 0.f, 110.f));
+
+	//PawnRotation - Usefull for static mouse rotation durinf devellopement
+	UFUNCTION(BlueprintCallable, Category = "VR")
+		void rotatePawn(float RotationRate, float XAxisInput, float YAxisIntput);
+
+	// check if HMD is worn
+	UFUNCTION(BlueprintCallable, Category = "VR")
+		bool isHMDWorn();
+
+	//print debug Message
+	UFUNCTION(BlueprintCallable, Category = "VR")
+		void printDebugMessage(FString Message, bool OverWriteExisting, float Duration, FColor Color);
+
+
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -106,6 +128,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
+private:
+
+	bool HitResult;
 	
 };
